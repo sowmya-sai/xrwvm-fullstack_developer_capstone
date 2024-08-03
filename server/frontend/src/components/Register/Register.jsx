@@ -20,9 +20,12 @@ const Register = () => {
 
   const register = async (e) => {
     e.preventDefault();
-
+    if (!userName || !password || !email || !firstName || !lastName) {
+        alert("Please fill in all fields.");
+        return;
+    }
     let register_url = window.location.origin+"/djangoapp/register";
-    
+    try{
     const res = await fetch(register_url, {
         method: "POST",
         headers: {
@@ -45,6 +48,12 @@ const Register = () => {
     else if (json.error === "Already Registered") {
       alert("The user with same username is already registered");
       window.location.href = window.location.origin;
+    }
+    else {
+        alert("Registration failed. Please try again.");
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again later.");
     }
 };
 
@@ -94,5 +103,4 @@ const Register = () => {
       </div>
   )
 }
-
 export default Register;

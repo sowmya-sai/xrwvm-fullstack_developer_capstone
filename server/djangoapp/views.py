@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def login_user(request):
     # Get username and password from request.POST dictionary
-    #data = json.loads(request.body)
+    data = json.loads(request.body)
     username = data['userName']
     password = data['password']
     # Try to check if provide credential can be authenticated
@@ -48,37 +48,59 @@ def logout_request(request):
 # @csrf_exempt
 # def registration(request):
 # ...
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+from django.views.decorators.csrf import csrf_exempt
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
 @csrf_exempt
 def registration(request):
     context = {}
 
-    data = json.loads(request.body)
-    username = data['userName']
-    password = data['password']
-    first_name = data['firstName']
-    last_name = data['lastName']
-    email = data['email']
-    username_exist = False
-    email_exist = False
     try:
-        # Check if user already exists
-        User.objects.get(username=username)
-        username_exist = True
-    except:
-        # If not, simply log this is a new user
-        logger.debug("{} is new user".format(username))
+        data = json.loads(request.body)
+        username = data['userName']
+        password = data['password']
+        first_name = data['firstName']
+        last_name = data['lastName']
+        email = data['email']
+        
+        username_exist = False
+        email_exist = False
+        
+        # Check if the username already exists
+        if User.objects.filter(username=username).exists():
+            username_exist = True
+        
+        # Check if the email already exists
+        if User.objects.filter(email=email).exists():
+            email_exist = True
 
-    # If it is a new user
-    if not username_exist:
-        # Create user in auth_user table
-        user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,password=password, email=email)
-        # Login the user and redirect to list page
+        # Handle already registered cases
+        if username_exist:
+            data = {"userName": username, "error": "Username Already Registered"}
+            return JsonResponse(data)
+        
+        if email_exist:
+            data = {"email": email, "error": "Email Already Registered"}
+            return JsonResponse(data)
+
+        # Create the new user
+        user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, password=password, email=email)
+        
+        # Automatically log in the new user
         login(request, user)
-        data = {"userName":username,"status":"Authenticated"}
+        
+        data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
-    else :
-        data = {"userName":username,"error":"Already Registered"}
-        return JsonResponse(data)
+
+    except Exception as e:
+        logger.error("Error in registration: %s", str(e))
+        return JsonResponse({"error": "Registration failed. Please try again later."}, status=500)
 
 # # Update the `get_dealerships` view to render the index page with
 # a list of dealerships
