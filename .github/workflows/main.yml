@@ -34,6 +34,7 @@ jobs:
         pwd
         # This command finds all Python files recursively and runs flake8 on them
         find . -name "*.py" -exec flake8 {} +
+        flake8 *.py 
         echo "Linted all the python files successfully"
 
   lint_js:
