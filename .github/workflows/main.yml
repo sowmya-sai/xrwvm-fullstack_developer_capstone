@@ -1,17 +1,17 @@
-name: 'Lint Code'
+name : 'Lint Code'
 
 on :
   push :
-    branches: [master, main]
+    branches : [master, main]
   pull_request :
-    branches: [master, main]
+    branches : [master, main]
 
-jobs:
-  lint_python:
-    name: Lint Python Files
-    runs-on: ubuntu-latest
+jobs :
+  lint_python :
+    name : Lint Python Files
+    runs-on : ubuntu-latest
 
-    steps:
+    steps :
     - name: Checkout Repository
       uses: actions/checkout@v3
     
