@@ -8,15 +8,15 @@ on:
 
 jobs:
   lint_python:
-    name:Lint Python Files
-    runs-on:ubuntu-latest
+    name: Lint Python Files
+    runs-on: ubuntu-latest
 
     steps:
-    - name:Checkout Repository
-      uses:actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3
     
-    - name:Set up Python
-      uses:actions/setup-python@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
         python-version: 3.12
 
