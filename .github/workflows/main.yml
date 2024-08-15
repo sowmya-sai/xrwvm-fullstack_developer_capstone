@@ -1,5 +1,3 @@
-
-permissions: 8 */
 name: 'Lint Code'
 
 on:
