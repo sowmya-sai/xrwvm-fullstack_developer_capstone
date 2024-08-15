@@ -32,6 +32,7 @@ jobs:
         /*jshint esversion: 8*/
         find. -name "*.py" -exec flake8{} +
         echo "Linted all the Python files successfully"
+        shell: /usr/bin/bash -e {0}
 
   lint_js:
     name: Lint JavaScript Files
