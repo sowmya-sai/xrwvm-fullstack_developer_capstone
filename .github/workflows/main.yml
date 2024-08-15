@@ -29,7 +29,7 @@ jobs:
       run: |
         # This command finds all Python files recursively and runs flake8 on them
         
-        /*jshint esversion: 8 */
+        /*jshint esversion: 8*/
         find. -name "*.py" -exec flake8 {} +
         echo "Linted all the Python files successfully"
 
@@ -53,7 +53,7 @@ jobs:
       run: |
         # This command finds all JavaScript files recursively and runs JSHint on them
         
-        /*jshint esversion: 8 */
+        /*jshint esversion: 8*/
         find. -name "*.js" -exec jshint {} +
         echo "Linted all the JavaScript files successfully"
         echo "Lint was completed successfully"
