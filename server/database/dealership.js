@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+/*jshint esversion: 8 */
+import { Schema as _Schema, model } from 'mongoose';
 
-const Schema = mongoose.Schema;
+const Schema = _Schema;
 
 const dealerships = new Schema({
 	id: {
@@ -40,4 +41,4 @@ const dealerships = new Schema({
   }
 });
 
-module.exports = mongoose.model('dealerships', dealerships);
+export default model('dealerships', dealerships);

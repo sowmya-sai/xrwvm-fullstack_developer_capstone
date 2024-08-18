@@ -1,7 +1,8 @@
-const { Int32 } = require('mongodb');
-const mongoose = require('mongoose');
+/*jshint esversion: 8 */
+import { Int32 } from 'mongodb';
+import { Schema as _Schema, model as _model } from 'mongoose';
 
-const Schema = mongoose.Schema;
+const Schema = _Schema;
 
 const cars = new Schema({
 dealer_id: {
@@ -30,4 +31,4 @@ mileage: {
   }
 });
 
-module.exports = mongoose.model('cars', cars);
+export default _model('cars', cars);
