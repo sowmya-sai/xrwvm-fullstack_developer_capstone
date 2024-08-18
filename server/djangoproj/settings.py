@@ -11,7 +11,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY =\
     'django-insecure-ccow$tz_=9%dxu4(0%^(z%nx32#s@(zt9$ih@)5l54yny)wm-0'
-DEBUG = True
+DEBUG = True if some_condition == True else False
 ALLOWED_HOSTS = ['localhost',
 url="https://sowmisomu11-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01"
     ".proxy.cognitiveclass.ai"
