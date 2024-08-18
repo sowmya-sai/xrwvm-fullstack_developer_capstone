@@ -11,5 +11,6 @@ function App() {
       <Route path="/dealers" element={<Dealers />} />
       <Route path="/register" element={<Register />} />
     </Routes>
-)};
+  );
+}
 export default App;
