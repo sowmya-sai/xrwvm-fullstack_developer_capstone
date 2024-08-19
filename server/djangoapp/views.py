@@ -100,7 +100,8 @@ def add_review(request):
             response = post_review(data)
             return JsonResponse({"status": 200})
         except Exception as e:
-            return JsonResponse({"status": 400,"message": "Bad Request", str(e)})
+            logger.error("Error in registration: %s", str(e))
+            return JsonResponse({"error": "Registration failed. Please try again later."}, status=500)
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
